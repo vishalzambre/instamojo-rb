@@ -16,6 +16,7 @@ module Instamojo
     end
 
     def auth_token
+      @access_token = nil
       token(credentials('client_credentials'))
     end
 
@@ -26,19 +27,16 @@ module Instamojo
     def signup(options = {})
       auth_token unless @access_token
       @header = true
-      options.require(:username, :password, :email, :phone)
       signup_url = "#{url}/v2/users/"
       post(signup_url, options)
     end
 
     def user_token(options = {})
-      options.require(:username, :password)
       token(options.merge!(credentials('password')))
     end
 
     def inrbanckaccount(user_id, options = {})
       @header = true
-      options.require(:account_holder_name, :account_number, :ifsc_code)
       bank_url = "#{url}/v2/users/#{user_id}/inrbankaccount/"
       post(bank_url, options)
     end
@@ -67,23 +65,25 @@ module Instamojo
     end
 
     def post(url, options = {})
-      uri = URI.parse(URI.encode(url))
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      req = Net::HTTP::Post.new(uri.path, headers)
-      req.body = "[ #{options.to_json} ]"
-      response = http.request(req)
-      URI.decode(response.body)
+      uri = URI(url)
+      req = Net::HTTP::Post.new(uri.path)
+      headers.each do |key, value|
+        req[key] = value
+      end
+      req.set_form_data(options)
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(req)
+      end
+      JSON.parse(URI.decode(response.body))
     end
 
     def headers
       http_header = {
-        'User-Agent' => 'Ruby 2.2.1',
-        'Content-Type' => 'application/json',
+        'Content-Type' => 'application/x-www-form-urlencoded',
         'Accept' => 'application/json'
       }
       return http_header unless header || @access_token
-      http_header.merge(Authorization: "Bearer #{@access_token}")
+      http_header.merge('Authorization' => "Bearer #{@access_token}")
     end
   end
 end
