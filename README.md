@@ -27,6 +27,7 @@ add following code to config/intializer/instamojo.rb
   Instamojo.configure do |config|
     config.client_id = 'XXXX'
     config.client_secret = 'XXXXXXX'
+    config.mode = :test
   end
 
 ```
