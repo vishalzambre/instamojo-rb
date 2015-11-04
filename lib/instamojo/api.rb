@@ -32,13 +32,13 @@ module Instamojo
     end
 
     def user_token(options = {})
-      token(options.merge!(credentials('password')))
+      token(options.merge(credentials('password')))
     end
 
     def inrbanckaccount(user_id, options = {})
       @header = true
       bank_url = "#{url}/v2/users/#{user_id}/inrbankaccount/"
-      post(bank_url, options)
+      put(bank_url, options)
     end
 
     private
@@ -67,6 +67,19 @@ module Instamojo
     def post(url, options = {})
       uri = URI(url)
       req = Net::HTTP::Post.new(uri.path)
+      headers.each do |key, value|
+        req[key] = value
+      end
+      req.set_form_data(options)
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(req)
+      end
+      JSON.parse(URI.decode(response.body))
+    end
+
+    def put(url, options = {})
+      uri = URI(url)
+      req = Net::HTTP::Put.new(uri.path)
       headers.each do |key, value|
         req[key] = value
       end
