@@ -4,8 +4,8 @@ require 'spec_helper'
 module Instamojo
   describe API do
     Instamojo.configure do |config|
-      config.client_id = 'KwA4SpZoR2ElYybItdxbIXYq42pIyfVSfFlwKKjz'
-      config.client_secret = 'fBu03SWN35XJri8HNdSEgKYHwoqvayruVy4WXURlJnKCpCTGedHRhRYujrTn3yUOKuWZgcb3AYXdvuJqXApy6GuFOWxCzxF2YMR1NP1m4oxPbIrl7vhAy40Suo1LHgMQ'
+      config.client_id = 'XXXX'
+      config.client_secret = 'XXXXXXX'
     end
     let(:api) { API.new }
 
