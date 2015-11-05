@@ -20,7 +20,6 @@ Or install it yourself as:
 
 ## Usage
 
-
 add following code to config/intializer/instamojo.rb
 
 ```ruby
@@ -34,6 +33,61 @@ add following code to config/intializer/instamojo.rb
 
 ## Development
 
+  ### Sign up method
+
+  ```
+  options = {
+    username: 'xxx', # manadatory
+    email: 'xxx@xxx.xxx', # manadatory
+    password: 'xxxxx233xxx', # manadatory
+    phone: 'xxxxxxxxx', # manadatory
+    referrer: 'xxxxx'
+  }
+  api.signup(options)
+  ``
+
+
+   ### Generate User Token
+
+   ```
+   options = {
+      username: 'xxx', # manadatory
+      password: 'xxxxx233xxx', # manadatory
+   }
+    api.user_token(options)
+   ```
+
+
+   ### Update Bank Details
+
+   ```
+  options = {
+    account_holder_name: 'xxx', # manadatory
+    account_number: '998799899', # manadatory
+    ifsc_code: 'JUUJU9889'
+  }
+   user_id # manadatory
+    api.inrbankaccount(user_id, options)
+   ```
+
+
+  ### Create Payment Link
+
+   ```
+    options = {
+     'amount': '2500', # mandatory
+     'purpose': 'FIFA 16', # mandatory
+     'buyer_name': 'John Doe', # mandatory
+     'email': 'foo@example.com',
+     'phone': '9999999999',
+     'redirect_url': 'http://www.example.com/redirect/',
+     'send_email': 'True',
+     'send_sms': 'True',
+     'webhook': 'http://www.example.com/webhook/'
+     'allow_repeated_payments': 'False',
+    }
+    api.payment_link(options)
+   ```
 
 ### API Doc
 
@@ -289,6 +343,214 @@ add following code to config/intializer/instamojo.rb
    ]
 }
 ```
+
+## Payment API
+
+```
+   {
+   "id":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
+   "name":"RAP V2",
+   "timestamp":1444044417026,
+   "requests":[
+      {
+         "collectionId":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
+         "id":"40564e31-10c1-0e71-1f2a-e40560b81dcb",
+         "name":"RAP details",
+         "description":"Get the details of a payment request using the payment_request_id",
+         "url":"{{API_SERVER}}/v2/payment_requests/{{PAYMENT_REQUEST_ID}}",
+         "method":"GET",
+         "headers":"Authorization: Bearer {{USER_ACCESS_TOKEN}\n",
+         "data":[
+            {
+               "key":"amount",
+               "value":"2500",
+               "type":"text"
+            },
+            {
+               "key":"purpose",
+               "value":"FIFA 16",
+               "type":"text"
+            },
+            {
+               "key":"send_sms",
+               "value":"True",
+               "type":"text"
+            },
+            {
+               "key":"phone",
+               "value":"9999999999",
+               "type":"text"
+            }
+         ],
+         "dataMode":"params",
+         "timestamp":0,
+         "version":2,
+         "time":1444116919416
+      },
+      {
+         "collectionId":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
+         "id":"48d9c02b-6884-3596-2735-6584c181875b",
+         "name":"RAP creation with send_sms",
+         "description":"If 'send_sms' field is passed as True then 'phone' field is compulsory.",
+         "url":"{{API_SERVER}}/v2/payment_requests/",
+         "method":"POST",
+         "headers":"Authorization: Bearer {{USER_ACCESS_TOKEN}\n",
+         "data":[
+            {
+               "key":"amount",
+               "value":"2500",
+               "type":"text"
+            },
+            {
+               "key":"purpose",
+               "value":"FIFA 16",
+               "type":"text"
+            },
+            {
+               "key":"send_sms",
+               "value":"True",
+               "type":"text"
+            },
+            {
+               "key":"phone",
+               "value":"9999999999",
+               "type":"text"
+            }
+         ],
+         "dataMode":"params",
+         "timestamp":0,
+         "version":2,
+         "time":1444116914545
+      },
+      {
+         "collectionId":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
+         "id":"69d60626-2572-44ad-daa3-96ee2a6a5f12",
+         "name":"RAP creation minimal data",
+         "description":"Amount and purpose are the only compulsory fields for creating a request payment.",
+         "url":"{{API_SERVER}}/v2/payment_requests/",
+         "method":"POST",
+         "headers":"Authorization: Bearer {{USER_ACCESS_TOKEN}\n",
+         "data":[
+            {
+               "key":"amount",
+               "value":"2500",
+               "type":"text"
+            },
+            {
+               "key":"purpose",
+               "value":"FIFA 16",
+               "type":"text"
+            }
+         ],
+         "dataMode":"params",
+         "timestamp":0,
+         "version":2,
+         "time":1444116823741
+      },
+      {
+         "collectionId":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
+         "id":"891e3ec0-9c39-c7c1-c5e8-b0a4f4ea6924",
+         "name":"RAP creation with maximal data",
+         "description":"This request contains all of the fields that we can pass with a payment request creation.",
+         "url":"{{API_SERVER}}/v2/payment_requests/",
+         "method":"POST",
+         "headers":"Authorization: Bearer {{USER_ACCESS_TOKEN}\n",
+         "data":[
+            {
+               "key":"amount",
+               "value":"2500",
+               "type":"text"
+            },
+            {
+               "key":"purpose",
+               "value":"FIFA 16",
+               "type":"text"
+            },
+            {
+               "key":"send_sms",
+               "value":"True",
+               "type":"text"
+            },
+            {
+               "key":"send_email",
+               "value":"True",
+               "type":"text"
+            },
+            {
+               "key":"phone",
+               "value":"9999999999",
+               "type":"text"
+            },
+            {
+               "key":"email",
+               "value":"foo@example.com",
+               "type":"text"
+            },
+            {
+               "key":"buyer_name",
+               "value":"John Doe",
+               "type":"text"
+            },
+            {
+               "key":"redirect_url",
+               "value":"http://www.example.com/redirect/",
+               "type":"text"
+            },
+            {
+               "key":"webhook",
+               "value":"http://www.example.com/webhook/",
+               "type":"text"
+            },
+            {
+               "key":"allow_repeated_payments",
+               "value":"False",
+               "type":"text"
+            }
+         ],
+         "dataMode":"params",
+         "timestamp":0,
+         "version":2,
+         "time":1444116905712
+      },
+      {
+         "collectionId":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
+         "id":"ff1f35b0-77d0-6a25-dadc-4fbba09073cf",
+         "name":"RAP creation with send_email",
+         "description":"If 'send_email' field is passed as True then 'email' field is compulsory.",
+         "url":"{{API_SERVER}}/v2/payment_requests/",
+         "method":"POST",
+         "headers":"Authorization: Bearer {{USER_ACCESS_TOKEN}\n",
+         "data":[
+            {
+               "key":"amount",
+               "value":"2500",
+               "type":"text"
+            },
+            {
+               "key":"purpose",
+               "value":"FIFA 16",
+               "type":"text"
+            },
+            {
+               "key":"send_email",
+               "value":"True",
+               "type":"text"
+            },
+            {
+               "key":"email",
+               "value":"foo@example.com",
+               "type":"text"
+            }
+         ],
+         "dataMode":"params",
+         "timestamp":0,
+         "version":2,
+         "time":1444116910314
+      }
+   ]
+}
+```
+
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
