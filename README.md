@@ -35,7 +35,7 @@ add following code to config/intializer/instamojo.rb
 
   ### Sign up method
 
-  ```
+```ruby
   options = {
     username: 'xxx', # manadatory
     email: 'xxx@xxx.xxx', # manadatory
@@ -44,23 +44,23 @@ add following code to config/intializer/instamojo.rb
     referrer: 'xxxxx'
   }
   api.signup(options)
-  ``
+```
 
 
    ### Generate User Token
 
-   ```
+```ruby
    options = {
       username: 'xxx', # manadatory
       password: 'xxxxx233xxx', # manadatory
    }
     api.user_token(options)
-   ```
+```
 
 
    ### Update Bank Details
 
-   ```
+```ruby
    options = {
     account_holder_name: 'xxx', # manadatory
     account_number: '998799899', # manadatory
@@ -69,12 +69,12 @@ add following code to config/intializer/instamojo.rb
 
    user_id # manadatory
    api.inrbankaccount(user_id, options)
-   ```
+```
 
 
   ### Create Payment Link
 
-   ```
+```ruby
    options = {
      'amount': '2500', # mandatory
      'purpose': 'FIFA 16', # mandatory
@@ -88,11 +88,11 @@ add following code to config/intializer/instamojo.rb
      'allow_repeated_payments': 'False',
    }
    api.payment_link(options)
-   ```
+```
 
 ### API Doc
 
-```
+```ruby
 {
    "id":"bf9d8993-83e1-5687-3c4a-3b9ac8c25fc1",
    "name":"auth-flow-integration",
@@ -347,7 +347,7 @@ add following code to config/intializer/instamojo.rb
 
 ## Payment API
 
-```
+```ruby
 {
    "id":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
    "name":"RAP V2",
