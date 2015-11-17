@@ -1,6 +1,6 @@
 # Instamojo
 
-Under Development
+Will use to integrate instomojo apis with ruby. Will support ruby 2.0 or newver
 
 ## Installation
 
@@ -61,20 +61,21 @@ add following code to config/intializer/instamojo.rb
    ### Update Bank Details
 
    ```
-  options = {
+   options = {
     account_holder_name: 'xxx', # manadatory
     account_number: '998799899', # manadatory
     ifsc_code: 'JUUJU9889'
-  }
+   }
+
    user_id # manadatory
-    api.inrbankaccount(user_id, options)
+   api.inrbankaccount(user_id, options)
    ```
 
 
   ### Create Payment Link
 
    ```
-    options = {
+   options = {
      'amount': '2500', # mandatory
      'purpose': 'FIFA 16', # mandatory
      'buyer_name': 'John Doe', # mandatory
@@ -85,8 +86,8 @@ add following code to config/intializer/instamojo.rb
      'send_sms': 'True',
      'webhook': 'http://www.example.com/webhook/'
      'allow_repeated_payments': 'False',
-    }
-    api.payment_link(options)
+   }
+   api.payment_link(options)
    ```
 
 ### API Doc
@@ -347,7 +348,7 @@ add following code to config/intializer/instamojo.rb
 ## Payment API
 
 ```
-   {
+{
    "id":"cffc6b9e-ab1c-4ba3-411d-fd45c38f671f",
    "name":"RAP V2",
    "timestamp":1444044417026,
