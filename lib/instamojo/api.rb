@@ -37,7 +37,15 @@ module Instamojo
 
     # Generate user access token
     def user_token(options = {})
-      token(options.merge(credentials('client_credentials')))
+      token(options.merge(credentials('password')))
+    end
+
+    # Update user detail to instamojo
+    def update_user_info(user_id, options = {})
+      check_token
+      @header = true
+      user_url = "#{url}/v2/users/#{user_id}/"
+      put(user_url, options)
     end
 
     # Update bank detail to instamojo
