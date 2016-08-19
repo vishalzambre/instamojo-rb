@@ -7,15 +7,15 @@ module Instamojo
   class API
     attr_accessor :config, :access_token, :refresh_token, :header
 
-    TEST_URL = 'https://test.instamojo.com'
-    LIVE_URL = 'https://instamojo.com'
+    TEST_URL = 'https://test.instamojo.com'.freeze
+    LIVE_URL = 'https://instamojo.com'.freeze
 
     def initialize(config = Instamojo.configuration)
       @config = config
       @header = true
     end
 
-    # Generate authetication token
+    # Generate authentication token
     def auth_token
       @access_token = nil
       token(credentials('client_credentials'))
@@ -67,7 +67,8 @@ module Instamojo
     # Get payment status
     def payment_status(payment_request_id)
       check_token
-      payment_url = "#{url}/v2/payments/#{payment_request_id}/"
+      api_url = config.mode == :production ? 'https://api.instamojo.com' : url
+      payment_url = "#{api_url}/v2/payments/#{payment_request_id}/"
       @header = true
       get(payment_url)
     end
