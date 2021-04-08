@@ -11,6 +11,6 @@ jobs:
       with:
         fetch-depth: '0'
     - name: Bump version and push tag
-      uses: Jobport/bump-gem-version-action
+      uses: Jobport/bump-gem-version-action@latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
