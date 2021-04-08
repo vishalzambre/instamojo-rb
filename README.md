@@ -1,6 +1,6 @@
 # Instamojo
 
-Will use to integrate instomojo apis with ruby. Will support ruby 2.0 or newver, autotags
+Will use to integrate instomojo apis with ruby. Will support ruby 2.0 or newver, autotags patch
 
 ## Installation
 
